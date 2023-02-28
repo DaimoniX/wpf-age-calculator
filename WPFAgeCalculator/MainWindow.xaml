@@ -22,7 +22,11 @@
                 <Label Content="Enter your birth date:"/>
                 <DatePicker SelectedDate="{Binding Date, Mode=OneWayToSource}" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
             </StackPanel>
-            <TextBlock Name="AgeText" Margin="0,10,0,0" Text="{Binding Age, Mode=OneWay, StringFormat='Your age is {0}'}"/>
+            <StackPanel x:Name="InfoGroup">
+                <TextBlock Margin="0,10,0,0" Text="{Binding Age, Mode=OneWay, StringFormat='Your age is {0}'}"/>
+                <TextBlock Margin="0,10,0,0" Text="{Binding WesternZodiacSign, Mode=OneWay, StringFormat='Your western zodiac sign is {0}'}"/>
+                <TextBlock Margin="0,10,0,0" Text="{Binding ChineseZodiacSign, Mode=OneWay, StringFormat='Your chinese zodiac sign is {0}'}"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
