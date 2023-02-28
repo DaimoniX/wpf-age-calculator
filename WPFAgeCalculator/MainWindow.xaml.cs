@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WPFAgeCalculator
 {
@@ -20,9 +8,28 @@ namespace WPFAgeCalculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly AgeViewModel _ageViewModel;
+        
         public MainWindow()
         {
             InitializeComponent();
+            AgeText.Visibility = Visibility.Collapsed;
+            DataContext = _ageViewModel = new AgeViewModel();
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_ageViewModel.IsValidBirthDate())
+            {
+                AgeText.Visibility = Visibility.Visible;
+                if (_ageViewModel.IsBirthdayToday())
+                    MessageBox.Show("Happy birthday!", "Congratulations", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                AgeText.Visibility = Visibility.Collapsed;
+                MessageBox.Show("Age cannot be more than 135 or less than 0", "Invalid age", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
